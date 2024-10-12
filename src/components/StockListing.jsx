@@ -3,7 +3,6 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import StockOverview from './StockOverview';
-import AIChat from './AIChat';
 
 const StockListing = () => {
   const [stocks, setStocks] = useState([
@@ -40,7 +39,7 @@ const StockListing = () => {
   ]);
 
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
-  const [selectedStock, setSelectedStock] = useState(null);
+  const [selectedStock, setSelectedStock] = useState(null); // Track selected stock
 
   const sortBy = (key) => {
     let direction = 'ascending';
@@ -58,9 +57,7 @@ const StockListing = () => {
 
   return (
     <div className="space-y-8 flex flex-col p-6">
-      <AIChat />
-      
-      {/* Stock Overview Component */}
+      {/* Stock Overview Component on Top */}
       <div>
         <h2 className="text-2xl font-bold mb-4">Stock Overview</h2>
         <StockOverview selectedStock={selectedStock} />
