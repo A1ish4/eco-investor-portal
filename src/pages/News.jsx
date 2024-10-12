@@ -28,45 +28,12 @@ const News = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {newsArticles.map((article) => (
           <div key={article.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-            <img src={article.image} alt={article.title} className="w-full h-48 object-cover" />
             <div className="p-4">
               <h2 className="text-xl font-semibold mb-2">{article.title}</h2>
               <p className="text-gray-600">{article.content}</p>
             </div>
           </div>
         ))}
-      </div>
-
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-2xl font-semibold mb-4">Add New Article</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <Input
-            type="text"
-            name="title"
-            placeholder="Article Title"
-            value={newArticle.title}
-            onChange={handleInputChange}
-            required
-          />
-          <Input
-            type="text"
-            name="image"
-            placeholder="Image URL"
-            value={newArticle.image}
-            onChange={handleInputChange}
-            required
-          />
-          <textarea
-            name="content"
-            placeholder="Article Content"
-            value={newArticle.content}
-            onChange={handleInputChange}
-            required
-            className="w-full p-2 border rounded-md"
-            rows="4"
-          ></textarea>
-          <Button type="submit">Add Article</Button>
-        </form>
       </div>
     </div>
   );
