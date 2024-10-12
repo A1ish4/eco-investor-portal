@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Home, TrendingUp, Users, Bell, Newspaper, BarChart2, BookOpen, Recycle, LineChart } from 'lucide-react';
+import { Home, TrendingUp, Users, Bell, Newspaper, BarChart2, BookOpen, LineChart } from 'lucide-react';
 
 const Navbar = () => {
   const navItems = [
@@ -12,7 +12,6 @@ const Navbar = () => {
     { to: '/news', icon: <Newspaper className="w-5 h-5" />, label: 'News' },
     { to: '/impact-tracker', icon: <BarChart2 className="w-5 h-5" />, label: 'Impact Tracker' },
     { to: '/learning-hub', icon: <BookOpen className="w-5 h-5" />, label: 'Learning Hub' },
-    { to: '/circular-economy-fund', icon: <Recycle className="w-5 h-5" />, label: 'Circular Economy Fund' },
   ];
 
   return (

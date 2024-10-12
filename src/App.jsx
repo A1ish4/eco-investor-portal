@@ -10,8 +10,9 @@ import Alerts from "./pages/Alerts";
 import News from "./pages/News";
 import ImpactTracker from "./pages/ImpactTracker";
 import LearningHub from "./pages/LearningHub";
-import CircularEconomyFund from "./pages/CircularEconomyFund";
 import StockListing from "./components/StockListing";
+import StartupDetails from "./pages/StartupDetails";
+import LearningModule from "./pages/LearningModule";
 
 const queryClient = new QueryClient();
 
@@ -27,11 +28,12 @@ const App = () => (
               <Route path="/" element={<Dashboard />} />
               <Route path="/recommendations" element={<Recommendations />} />
               <Route path="/crowdfunding" element={<Crowdfunding />} />
+              <Route path="/startup/:id" element={<StartupDetails />} />
               <Route path="/alerts" element={<Alerts />} />
               <Route path="/news" element={<News />} />
               <Route path="/impact-tracker" element={<ImpactTracker />} />
               <Route path="/learning-hub" element={<LearningHub />} />
-              <Route path="/circular-economy-fund" element={<CircularEconomyFund />} />
+              <Route path="/learning-hub/:moduleId" element={<LearningModule />} />
               <Route path="/stocks" element={<StockListing />} />
             </Routes>
           </main>
