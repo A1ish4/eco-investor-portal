@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button";
 
 const News = () => {
   const [newsArticles, setNewsArticles] = useState([
-    { id: 1, title: "Tesla's New Solar Roof Tiles Break Efficiency Records", image: "https://example.com/tesla-solar.jpg", content: "Tesla's latest solar roof tiles have achieved a record-breaking efficiency of 25%, marking a significant leap in residential solar technology." },
-    { id: 2, title: "Wind Energy Surpasses Coal in Europe for the First Time", image: "https://example.com/wind-energy.jpg", content: "In a historic milestone, wind energy generation in Europe has surpassed coal-powered electricity for the first time, signaling a major shift towards renewable energy." },
-    { id: 3, title: "New Biodegradable Plastic Alternative Developed from Seaweed", image: "https://example.com/seaweed-plastic.jpg", content: "Scientists have created a fully biodegradable plastic alternative using seaweed, potentially revolutionizing the packaging industry and reducing ocean pollution." },
+    { id: 1, title: "Tesla's New Solar Roof Tiles Break Efficiency Records", content: "Tesla's latest solar roof tiles have achieved a record-breaking efficiency of 25%, marking a significant leap in residential solar technology." },
+    { id: 2, title: "Wind Energy Surpasses Coal in Europe for the First Time", content: "In a historic milestone, wind energy generation in Europe has surpassed coal-powered electricity for the first time, signaling a major shift towards renewable energy." },
+    { id: 3, title: "New Biodegradable Plastic Alternative Developed from Seaweed", content: "Scientists have created a fully biodegradable plastic alternative using seaweed, potentially revolutionizing the packaging industry and reducing ocean pollution." },
   ]);
 
   const [newArticle, setNewArticle] = useState({ title: '', content: '', image: '' });
