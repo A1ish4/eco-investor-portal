@@ -1,8 +1,6 @@
-// StockOverview.jsx
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-// Sample data for the stock chart with more data points
 const sampleChartData = [
   { date: 'Jan 1, 2024', price: 390 },
   { date: 'Jan 15, 2024', price: 400 },
@@ -28,7 +26,7 @@ const sampleChartData = [
 ];
 
 const StockOverview = ({ selectedStock }) => {
-  const metaData = {
+  const defaultStock = {
     name: 'Meta Platforms Inc',
     ticker: 'META',
     price: 589.95,
@@ -45,33 +43,37 @@ const StockOverview = ({ selectedStock }) => {
     yearLow: 279.40,
   };
 
-  const stock = selectedStock || metaData;
+  const stock = selectedStock || defaultStock;
 
   const {
     name, ticker, price, change, changePercent, open, high, low, esgPoints,
     marketCap, peRatio, divYield, yearHigh, yearLow,
   } = stock;
 
+  const formatNumber = (value) => {
+    return typeof value === 'number' ? value.toFixed(2) : 'N/A';
+  };
+
   return (
     <div className="p-6 bg-gray-900 text-white rounded-md shadow-md space-y-6">
       <h1 className="text-3xl font-semibold">{name} ({ticker})</h1>
-      <p className="text-2xl">${price.toFixed(2)} USD</p>
+      <p className="text-2xl">${formatNumber(price)} USD</p>
       <p className={`text-xl ${change >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-        {change >= 0 ? '+' : ''}{change.toFixed(2)} ({changePercent}%)
+        {change >= 0 ? '+' : ''}{formatNumber(change)} ({changePercent}%)
       </p>
 
       <div className="grid grid-cols-2 gap-4 mt-4">
         <div>
           <p className="text-gray-400">Open</p>
-          <p>${open.toFixed(2)}</p>
+          <p>${formatNumber(open)}</p>
         </div>
         <div>
           <p className="text-gray-400">High</p>
-          <p>${high.toFixed(2)}</p>
+          <p>${formatNumber(high)}</p>
         </div>
         <div>
           <p className="text-gray-400">Low</p>
-          <p>${low.toFixed(2)}</p>
+          <p>${formatNumber(low)}</p>
         </div>
         <div>
           <p className="text-gray-400">ESG Points</p>
@@ -91,11 +93,11 @@ const StockOverview = ({ selectedStock }) => {
         </div>
         <div>
           <p className="text-gray-400">52-wk High</p>
-          <p>${yearHigh.toFixed(2)}</p>
+          <p>${formatNumber(yearHigh)}</p>
         </div>
         <div>
           <p className="text-gray-400">52-wk Low</p>
-          <p>${yearLow.toFixed(2)}</p>
+          <p>${formatNumber(yearLow)}</p>
         </div>
       </div>
 
