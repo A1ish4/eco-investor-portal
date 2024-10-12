@@ -75,10 +75,10 @@ const Dashboard = () => {
         </p>
 
         <div className="space-y-8">
-          {/* Transaction Voucher Section */}
           <div className="space-y-4">
             <img
-              src="/Get $5-2.png" style={{ height: '200px', width: '600px', marginBottom: '10px' }}
+              src="/Get $5-2.png"
+              style={{ height: '200px', width: '600px', marginBottom: '10px' }}
               alt="Transaction Voucher"
               className="w-32 h-32 object-cover mb-2"
             />
@@ -98,10 +98,10 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Green Voucher Section */}
           <div className="space-y-4">
             <img
-              src="/Get $5.png" style={{ height: '200px', width: '600px', marginBottom: '10px' }}
+              src="/Get $5.png"
+              style={{ height: '200px', width: '600px', marginBottom: '10px' }}
               alt="Get $5 of Microsoft Stock Voucher"
               className="w-32 h-32 object-cover mb-2"
             />
@@ -109,7 +109,7 @@ const Dashboard = () => {
               <div>
                 <p className="font-semibold">$5 of Microsoft Stock Voucher</p>
                 <p className="text-gray-600">
-                Congralutions! Get yourself $5 of Microsoft Stock Voucher now!
+                  Congratulations! Get yourself $5 of Microsoft Stock Voucher now!
                 </p>
               </div>
               <Button
@@ -142,6 +142,53 @@ const Dashboard = () => {
             Total ESG Points: <span className="font-bold text-blue-600">{totalESGPoints}</span>
           </p>
         </div>
+      </div>
+
+      <div className="bg-white p-6 rounded-lg shadow">
+        <h2 className="text-xl font-semibold mb-4">Impact History</h2>
+        <ResponsiveContainer width="100%" height={400}>
+          <LineChart data={impactData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="month" />
+            <YAxis yAxisId="left" />
+            <YAxis yAxisId="right" orientation="right" />
+            <Tooltip />
+            <Legend />
+            <Line yAxisId="left" type="monotone" dataKey="co2Saved" stroke="#82ca9d" name="CO2 Saved (tons)" />
+            <Line yAxisId="left" type="monotone" dataKey="wasteReduction" stroke="#8884d8" name="Waste Reduction (tons)" />
+            <Line yAxisId="right" type="monotone" dataKey="esgPoints" stroke="#ffc658" name="ESG Points" />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+
+      <div className="bg-white p-6 rounded-lg shadow">
+        <h2 className="text-xl font-semibold mb-4">Investment Distribution</h2>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={portfolioData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis yAxisId="left" orientation="left" stroke="#8884d8" />
+            <YAxis yAxisId="right" orientation="right" stroke="#82ca9d" />
+            <Tooltip />
+            <Legend />
+            <Bar yAxisId="left" dataKey="value" fill="#8884d8" name="Investment Value ($)" />
+            <Bar yAxisId="right" dataKey="esgPoints" fill="#82ca9d" name="ESG Points" />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
+      <div className="bg-white p-6 rounded-lg shadow">
+        <h2 className="text-xl font-semibold mb-4">ESG Score Trend</h2>
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={esgTrendData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="month" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="esgScore" stroke="#8884d8" />
+          </LineChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );
