@@ -21,7 +21,6 @@ const AIChat = () => {
         • Selling Strategy: Sell if the price reaches $90.00 or if major regulatory changes impact the sector.
         • Historical Data: Stock has historically rallied during renewable energy policy announcements.
         • Recent News: Recently secured contracts for new solar projects expected to increase revenue.
-        • Visuals: Line Chart: Showing price trend over the past year with key price points highlighted.
 
         2. Enphase Energy (ENPH)
         • Overview: Innovator in solar energy technology, particularly in solar microinverters.
@@ -42,7 +41,6 @@ const AIChat = () => {
         • Selling Strategy: Sell if the stock drops below $35.00 (indicating potential market concerns).
         • Historical Data: Price increased significantly after quarterly earnings exceeded estimates.
         • Recent News: Increased government support for renewable investments reported.
-        • Visuals: Pie Chart: Showing energy portfolio breakdown by type (hydro, wind, solar).
       `);
     } else {
       // TODO: Implement actual API call to AI backend
