@@ -122,7 +122,7 @@ const Dashboard = () => {
           </div>
           
           {/* Free Green Stock Section */}
-          <div className="space-y-4">
+          <div className="space-y-9">
             <img
               src="https://via.placeholder.com/150"
               alt="$5 Worth of Microsoft stock"
