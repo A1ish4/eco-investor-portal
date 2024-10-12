@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Home, TrendingUp, Users, Bell, Newspaper, BarChart2, BookOpen, LineChart } from 'lucide-react';
+import { LineChart, Home, TrendingUp, Users, Bell, Newspaper, BarChart2, BookOpen } from 'lucide-react';
 
 const Navbar = () => {
   const navItems = [
-    { to: '/', icon: <Home className="w-5 h-5" />, label: 'Dashboard' },
-    { to: '/stocks', icon: <LineChart className="w-5 h-5" />, label: 'Stocks' },
+    { to: '/', icon: <LineChart className="w-5 h-5" />, label: 'Stocks' },
+    { to: '/dashboard', icon: <Home className="w-5 h-5" />, label: 'Dashboard' },
     { to: '/recommendations', icon: <TrendingUp className="w-5 h-5" />, label: 'Recommendations' },
     { to: '/crowdfunding', icon: <Users className="w-5 h-5" />, label: 'Crowdfunding' },
     { to: '/alerts', icon: <Bell className="w-5 h-5" />, label: 'Alerts' },

@@ -25,7 +25,8 @@ const App = () => (
           <Navbar />
           <main className="container mx-auto px-4 py-8">
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/" element={<StockListing />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/recommendations" element={<Recommendations />} />
               <Route path="/crowdfunding" element={<Crowdfunding />} />
               <Route path="/startup/:id" element={<StartupDetails />} />
@@ -34,7 +35,6 @@ const App = () => (
               <Route path="/impact-tracker" element={<ImpactTracker />} />
               <Route path="/learning-hub" element={<LearningHub />} />
               <Route path="/learning-hub/:moduleId" element={<LearningModule />} />
-              <Route path="/stocks" element={<StockListing />} />
             </Routes>
           </main>
         </div>
