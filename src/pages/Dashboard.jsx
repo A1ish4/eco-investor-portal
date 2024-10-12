@@ -101,7 +101,7 @@ const Dashboard = () => {
           {/* Green Voucher Section */}
           <div className="space-y-4">
             <img
-              src="https://via.placeholder.com/150"
+              src="/Get $5.png" style={{ height: '200px', width: '600px', marginBottom: '10px' }}
               alt="Get $5 of Microsoft Stock Voucher"
               className="w-32 h-32 object-cover mb-2"
             />
