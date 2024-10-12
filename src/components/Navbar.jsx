@@ -6,7 +6,6 @@ const Navbar = () => {
   const navItems = [
     { to: '/', icon: <LineChart className="w-5 h-5" />, label: 'Stocks' },
     { to: '/dashboard', icon: <Home className="w-5 h-5" />, label: 'Personal Dashboard' },
-    { to: '/recommendations', icon: <TrendingUp className="w-5 h-5" />, label: 'Recommendations' },
     { to: '/crowdfunding', icon: <Users className="w-5 h-5" />, label: 'Crowdfunding' },
     { to: '/news', icon: <Newspaper className="w-5 h-5" />, label: 'News' },
     { to: '/learning-hub', icon: <BookOpen className="w-5 h-5" />, label: 'Learning Hub' },
