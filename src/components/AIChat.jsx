@@ -32,7 +32,6 @@ const AIChat = () => {
         • Selling Strategy: Sell if price exceeds $160.00, especially if quarterly results underperform.
         • Historical Data: Significant price spikes followed favorable solar incentives in legislation.
         • Recent News: Partnered with a major utility company to expand market reach.
-        • Visuals: Bar Chart: Showing quarterly revenue growth over the past year.
 
         3. Brookfield Renewable Partners (BEP)
         • Overview: Focuses on hydroelectric, wind, and solar energy.
