@@ -109,7 +109,7 @@ const Dashboard = () => {
               <div>
                 <p className="font-semibold">$5 of Microsoft Stock Voucher</p>
                 <p className="text-gray-600">
-                $5 of Microsoft Stock Voucher.
+                Congralutions! Get yourself $5 of Microsoft Stock Voucher now!
                 </p>
               </div>
               <Button
