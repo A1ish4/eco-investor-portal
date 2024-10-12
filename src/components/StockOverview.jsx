@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { Button } from "@/components/ui/button";
 
 const sampleChartData = [
   { date: 'Jan 1, 2024', price: 390 },
@@ -26,6 +27,9 @@ const sampleChartData = [
 ];
 
 const StockOverview = ({ selectedStock }) => {
+  const [shares, setShares] = useState(0);
+  const [cash, setCash] = useState(10000); // Starting with $10,000 cash
+
   const defaultStock = {
     name: 'Meta Platforms Inc',
     ticker: 'META',
@@ -54,6 +58,24 @@ const StockOverview = ({ selectedStock }) => {
     return typeof value === 'number' ? value.toFixed(2) : 'N/A';
   };
 
+  const handleBuy = () => {
+    if (cash >= price) {
+      setShares(shares + 1);
+      setCash(cash - price);
+    } else {
+      alert("Not enough cash to buy this stock!");
+    }
+  };
+
+  const handleSell = () => {
+    if (shares > 0) {
+      setShares(shares - 1);
+      setCash(cash + price);
+    } else {
+      alert("No shares to sell!");
+    }
+  };
+
   return (
     <div className="p-6 bg-gray-900 text-white rounded-md shadow-md space-y-6">
       <h1 className="text-3xl font-semibold">{name} ({ticker})</h1>
@@ -61,6 +83,16 @@ const StockOverview = ({ selectedStock }) => {
       <p className={`text-xl ${change >= 0 ? 'text-green-500' : 'text-red-500'}`}>
         {change >= 0 ? '+' : ''}{formatNumber(change)} ({changePercent}%)
       </p>
+
+      <div className="flex space-x-4">
+        <Button onClick={handleBuy} className="bg-green-500 hover:bg-green-600">Buy</Button>
+        <Button onClick={handleSell} className="bg-red-500 hover:bg-red-600">Sell</Button>
+      </div>
+
+      <div className="text-lg">
+        <p>Shares Owned: {shares}</p>
+        <p>Cash Available: ${formatNumber(cash)}</p>
+      </div>
 
       <div className="grid grid-cols-2 gap-4 mt-4">
         <div>
