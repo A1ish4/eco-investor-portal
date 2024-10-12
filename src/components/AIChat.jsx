@@ -8,8 +8,47 @@ const AIChat = () => {
 
   const handleQuerySubmit = async (e) => {
     e.preventDefault();
-    // TODO: Implement actual API call to AI backend
-    setResponse(`AI response to: "${query}"`);
+    if (query === 'I want to invest in low-risk renewable energy.') {
+      setResponse(`
+        Investment Recommendation Output
+
+        1. NextEra Energy (NEE)
+        • Overview: A leader in renewable energy focused on wind and solar power.
+        • Current Price: $75.00
+        • Growth Potential: Target price: $90.00 (+20%)
+        • Why Invest? Consistent dividend payments. Strong commitment to sustainability.
+        • Buying Strategy: Buy when the price dips below $73.00 (historically strong support level).
+        • Selling Strategy: Sell if the price reaches $90.00 or if major regulatory changes impact the sector.
+        • Historical Data: Stock has historically rallied during renewable energy policy announcements.
+        • Recent News: Recently secured contracts for new solar projects expected to increase revenue.
+        • Visuals: Line Chart: Showing price trend over the past year with key price points highlighted.
+
+        2. Enphase Energy (ENPH)
+        • Overview: Innovator in solar energy technology, particularly in solar microinverters.
+        • Current Price: $120.00
+        • Growth Potential: Target price: $160.00 (+33%)
+        • Why Invest? High growth rate in the solar market. Increasing demand for innovative technologies.
+        • Buying Strategy: Buy on any dip below $115.00 (predicted strong earnings growth).
+        • Selling Strategy: Sell if price exceeds $160.00, especially if quarterly results underperform.
+        • Historical Data: Significant price spikes followed favorable solar incentives in legislation.
+        • Recent News: Partnered with a major utility company to expand market reach.
+        • Visuals: Bar Chart: Showing quarterly revenue growth over the past year.
+
+        3. Brookfield Renewable Partners (BEP)
+        • Overview: Focuses on hydroelectric, wind, and solar energy.
+        • Current Price: $40.00
+        • Growth Potential: Target price: $52.00 (+30%)
+        • Why Invest? Strong ESG performance. Stable dividend yield.
+        • Buying Strategy: Buy when the price is below $38.00 (based on past trends).
+        • Selling Strategy: Sell if the stock drops below $35.00 (indicating potential market concerns).
+        • Historical Data: Price increased significantly after quarterly earnings exceeded estimates.
+        • Recent News: Increased government support for renewable investments reported.
+        • Visuals: Pie Chart: Showing energy portfolio breakdown by type (hydro, wind, solar).
+      `);
+    } else {
+      // TODO: Implement actual API call to AI backend
+      setResponse(`AI response to: "${query}"`);
+    }
   };
 
   return (
@@ -28,7 +67,7 @@ const AIChat = () => {
       {response && (
         <div className="mt-4 p-4 bg-gray-100 rounded">
           <p className="font-semibold">AI Response:</p>
-          <p>{response}</p>
+          <pre className="whitespace-pre-wrap">{response}</pre>
         </div>
       )}
     </div>
