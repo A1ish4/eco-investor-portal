@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts';
+import { 
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, 
+  ResponsiveContainer, LineChart, Line 
+} from 'recharts';
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 
 const Dashboard = () => {
   const [transactionVouchers, setTransactionVouchers] = useState(15);
   const [commissionVouchers, setCommissionVouchers] = useState(15);
-  const [transactionImage, setTransactionImage] = useState(null);
-  const [commissionImage, setCommissionImage] = useState(null);
 
   const portfolioData = [
     { name: 'Renewable Energy', value: 4000, impact: 2400, esgPoints: 85 },
@@ -52,53 +53,44 @@ const Dashboard = () => {
     }
   };
 
-  const handleImageChange = (e, type) => {
-    const file = e.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      type === 'transaction'
-        ? setTransactionImage(imageUrl)
-        : setCommissionImage(imageUrl);
-    }
-  };
-
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold text-gray-800">Personal Dashboard & Portfolio</h1>
 
       <div className="bg-white p-6 rounded-lg shadow">
         <h2 className="text-xl font-semibold mb-4">Tier Progress</h2>
-        <p className="text-gray-600 mb-2">Current Tier: <span className="font-bold text-blue-600">{currentTier}</span></p>
-        <p className="text-gray-600 mb-4">{pointsToNextTier} points to {nextTier} tier</p>
+        <p className="text-gray-600 mb-2">
+          Current Tier: <span className="font-bold text-blue-600">{currentTier}</span>
+        </p>
+        <p className="text-gray-600 mb-4">
+          {pointsToNextTier} points to {nextTier} tier
+        </p>
         <Progress value={tierProgress} className="w-full" />
       </div>
 
       <div className="bg-white p-6 rounded-lg shadow">
         <h2 className="text-xl font-semibold mb-4">Rewards</h2>
-        <p className="text-gray-600 mb-4">As a {currentTier} tier member, you are eligible for the following rewards:</p>
+        <p className="text-gray-600 mb-4">
+          As a {currentTier} tier member, you are eligible for the following rewards:
+        </p>
 
         <div className="space-y-8">
+          {/* Transaction Voucher Section */}
           <div className="space-y-4">
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => handleImageChange(e, 'transaction')}
-              className="mb-2"
+            <img
+              src="https://via.placeholder.com/150"
+              alt="Transaction Voucher"
+              className="w-32 h-32 object-cover mb-2"
             />
-            {transactionImage && (
-              <img
-                src={transactionImage}
-                alt="Transaction Voucher"
-                className="w-32 h-32 object-cover mb-2"
-              />
-            )}
             <div className="flex justify-between items-center">
               <div>
                 <p className="font-semibold">Transaction Fee Offset Voucher</p>
-                <p className="text-gray-600">Offsets transaction fees on your next 1 transaction.</p>
+                <p className="text-gray-600">
+                  Offsets transaction fees on your next 1 transaction.
+                </p>
               </div>
-              <Button 
-                onClick={() => handleUseVoucher('transaction')} 
+              <Button
+                onClick={() => handleUseVoucher('transaction')}
                 disabled={transactionVouchers === 0}
               >
                 Use Voucher ({transactionVouchers} left)
@@ -106,27 +98,22 @@ const Dashboard = () => {
             </div>
           </div>
 
+          {/* Commission Voucher Section */}
           <div className="space-y-4">
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => handleImageChange(e, 'commission')}
-              className="mb-2"
+            <img
+              src="https://via.placeholder.com/150"
+              alt="Commission Voucher"
+              className="w-32 h-32 object-cover mb-2"
             />
-            {commissionImage && (
-              <img
-                src={commissionImage}
-                alt="Commission Voucher"
-                className="w-32 h-32 object-cover mb-2"
-              />
-            )}
             <div className="flex justify-between items-center">
               <div>
                 <p className="font-semibold">Commission Fee Offset Voucher</p>
-                <p className="text-gray-600">Offsets commission fees on your next service.</p>
+                <p className="text-gray-600">
+                  Offsets commission fees on your next service.
+                </p>
               </div>
-              <Button 
-                onClick={() => handleUseVoucher('commission')} 
+              <Button
+                onClick={() => handleUseVoucher('commission')}
                 disabled={commissionVouchers === 0}
               >
                 Use Voucher ({commissionVouchers} left)
@@ -139,11 +126,21 @@ const Dashboard = () => {
       <div className="bg-white p-6 rounded-lg shadow">
         <h2 className="text-xl font-semibold mb-4">Portfolio Overview</h2>
         <div className="space-y-2">
-          <p className="text-gray-600">Total Value: <span className="font-bold text-green-600">$24,670</span></p>
-          <p className="text-gray-600">Total Return: <span className="font-bold text-green-600">+12.5%</span></p>
-          <p className="text-gray-600">CO2 Emissions Saved: <span className="font-bold text-green-600">{totalCO2Saved} kg</span></p>
-          <p className="text-gray-600">Waste Reduction: <span className="font-bold text-green-600">{totalWasteReduction} kg</span></p>
-          <p className="text-gray-600">Total ESG Points: <span className="font-bold text-blue-600">{totalESGPoints}</span></p>
+          <p className="text-gray-600">
+            Total Value: <span className="font-bold text-green-600">$24,670</span>
+          </p>
+          <p className="text-gray-600">
+            Total Return: <span className="font-bold text-green-600">+12.5%</span>
+          </p>
+          <p className="text-gray-600">
+            CO2 Emissions Saved: <span className="font-bold text-green-600">{totalCO2Saved} kg</span>
+          </p>
+          <p className="text-gray-600">
+            Waste Reduction: <span className="font-bold text-green-600">{totalWasteReduction} kg</span>
+          </p>
+          <p className="text-gray-600">
+            Total ESG Points: <span className="font-bold text-blue-600">{totalESGPoints}</span>
+          </p>
         </div>
       </div>
     </div>
