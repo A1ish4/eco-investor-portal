@@ -78,7 +78,7 @@ const Dashboard = () => {
           {/* Transaction Voucher Section */}
           <div className="space-y-4">
             <img
-              src="/Get $5-2.png" style={{ height: '200px', marginBottom: '20px' }}
+              src="/Get $5-2.png" style={{ height: '200px', marginBottom: '600px' }}
               alt="Transaction Voucher"
               className="w-32 h-32 object-cover mb-2"
             />
