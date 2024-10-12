@@ -1,10 +1,11 @@
 import React from 'react';
+import AIRecommendationEngine from '../components/AIRecommendationEngine';
 
 const Recommendations = () => {
   return (
-    <div>
+    <div className="space-y-6">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">AI-Driven Stock Recommendations</h1>
-      <p className="text-gray-600">This page will contain the AI-driven stock recommendation engine interface.</p>
+      <AIRecommendationEngine />
     </div>
   );
 };

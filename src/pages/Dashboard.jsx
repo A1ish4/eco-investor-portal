@@ -1,5 +1,5 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 const Dashboard = () => {
   const portfolioData = [
@@ -9,6 +9,14 @@ const Dashboard = () => {
     { name: 'Green Transport', value: 2780, impact: 3908 },
     { name: 'Circular Products', value: 1890, impact: 4800 },
   ];
+
+  const esgScores = [
+    { name: 'Environmental', value: 85 },
+    { name: 'Social', value: 75 },
+    { name: 'Governance', value: 80 },
+  ];
+
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
 
   return (
     <div className="space-y-6">
@@ -21,23 +29,48 @@ const Dashboard = () => {
             <p className="text-gray-600">Total Value: <span className="font-bold text-green-600">$24,670</span></p>
             <p className="text-gray-600">Total Return: <span className="font-bold text-green-600">+12.5%</span></p>
             <p className="text-gray-600">CO2 Emissions Saved: <span className="font-bold text-green-600">1,250 kg</span></p>
+            <p className="text-gray-600">Waste Reduction: <span className="font-bold text-green-600">500 kg</span></p>
           </div>
         </div>
         
         <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Investment Distribution</h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={portfolioData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
+          <h2 className="text-xl font-semibold mb-4">ESG Scores</h2>
+          <ResponsiveContainer width="100%" height={200}>
+            <PieChart>
+              <Pie
+                data={esgScores}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                outerRadius={80}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {esgScores.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
               <Tooltip />
               <Legend />
-              <Bar dataKey="value" fill="#4ade80" name="Investment Value ($)" />
-              <Bar dataKey="impact" fill="#22c55e" name="Environmental Impact Score" />
-            </BarChart>
+            </PieChart>
           </ResponsiveContainer>
         </div>
+      </div>
+      
+      <div className="bg-white p-6 rounded-lg shadow">
+        <h2 className="text-xl font-semibold mb-4">Investment Distribution</h2>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={portfolioData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis yAxisId="left" orientation="left" stroke="#8884d8" />
+            <YAxis yAxisId="right" orientation="right" stroke="#82ca9d" />
+            <Tooltip />
+            <Legend />
+            <Bar yAxisId="left" dataKey="value" fill="#8884d8" name="Investment Value ($)" />
+            <Bar yAxisId="right" dataKey="impact" fill="#82ca9d" name="Environmental Impact Score" />
+          </BarChart>
+        </ResponsiveContainer>
       </div>
       
       <div className="bg-white p-6 rounded-lg shadow">
