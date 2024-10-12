@@ -39,7 +39,7 @@ const StockListing = () => {
   ]);
 
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
-  const [selectedStock, setSelectedStock] = useState(null); // Track the selected stock
+  const [selectedStock, setSelectedStock] = useState(null); // Track selected stock
 
   const sortBy = (key) => {
     let direction = 'ascending';
@@ -56,45 +56,48 @@ const StockListing = () => {
   };
 
   return (
-    <div className="space-y-8">
-      <h2 className="text-2xl font-bold">Stock Listings</h2>
-      <div className="flex space-x-2">
-        <Input type="text" placeholder="Search stocks..." className="w-full" />
-        <Button>Search</Button>
+    <div className="space-y-8 flex flex-col p-6">
+      {/* Stock Overview Component on Top */}
+      <div>
+        <h2 className="text-2xl font-bold mb-4">Stock Overview</h2>
+        <StockOverview selectedStock={selectedStock} />
       </div>
 
-      <div className="flex space-x-8">
-        <div className="w-2/3">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead onClick={() => sortBy('name')} className="cursor-pointer">Company</TableHead>
-                <TableHead onClick={() => sortBy('ticker')} className="cursor-pointer">Ticker</TableHead>
-                <TableHead onClick={() => sortBy('price')} className="cursor-pointer">Price</TableHead>
-                <TableHead onClick={() => sortBy('change')} className="cursor-pointer">24h Change</TableHead>
-                <TableHead onClick={() => sortBy('esgPoints')} className="cursor-pointer">ESG Points</TableHead>
+      {/* Stock Listing Table */}
+      <div>
+        <h2 className="text-2xl font-bold mb-4">Stock Listings</h2>
+        <div className="flex space-x-2 mb-4">
+          <Input type="text" placeholder="Search stocks..." className="w-full" />
+          <Button>Search</Button>
+        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead onClick={() => sortBy('name')} className="cursor-pointer">Company</TableHead>
+              <TableHead onClick={() => sortBy('ticker')} className="cursor-pointer">Ticker</TableHead>
+              <TableHead onClick={() => sortBy('price')} className="cursor-pointer">Price</TableHead>
+              <TableHead onClick={() => sortBy('change')} className="cursor-pointer">24h Change</TableHead>
+              <TableHead onClick={() => sortBy('esgPoints')} className="cursor-pointer">ESG Points</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {stocks.map((stock) => (
+              <TableRow
+                key={stock.id}
+                onClick={() => setSelectedStock(stock)}
+                className="cursor-pointer hover:bg-gray-100"
+              >
+                <TableCell>{stock.name}</TableCell>
+                <TableCell>{stock.ticker}</TableCell>
+                <TableCell>${stock.price.toFixed(2)}</TableCell>
+                <TableCell className={stock.change >= 0 ? 'text-green-600' : 'text-red-600'}>
+                  {stock.change >= 0 ? '+' : ''}{stock.change}%
+                </TableCell>
+                <TableCell>{stock.esgPoints}</TableCell>
               </TableRow>
-            </TableHeader>
-            <TableBody>
-              {stocks.map((stock) => (
-                <TableRow key={stock.id} onClick={() => setSelectedStock(stock)} className="cursor-pointer hover:bg-gray-100">
-                  <TableCell>{stock.name}</TableCell>
-                  <TableCell>{stock.ticker}</TableCell>
-                  <TableCell>${stock.price.toFixed(2)}</TableCell>
-                  <TableCell className={stock.change >= 0 ? 'text-green-600' : 'text-red-600'}>
-                    {stock.change >= 0 ? '+' : ''}{stock.change}%
-                  </TableCell>
-                  <TableCell>{stock.esgPoints}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-
-        <div className="w-1/3">
-          <h3 className="text-xl font-semibold mb-4">Stock Overview</h3>
-          <StockOverview selectedStock={selectedStock} />
-        </div>
+            ))}
+          </TableBody>
+        </Table>
       </div>
     </div>
   );
