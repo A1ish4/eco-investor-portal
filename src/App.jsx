@@ -11,6 +11,7 @@ import News from "./pages/News";
 import ImpactTracker from "./pages/ImpactTracker";
 import LearningHub from "./pages/LearningHub";
 import CircularEconomyFund from "./pages/CircularEconomyFund";
+import StockListing from "./components/StockListing";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
               <Route path="/impact-tracker" element={<ImpactTracker />} />
               <Route path="/learning-hub" element={<LearningHub />} />
               <Route path="/circular-economy-fund" element={<CircularEconomyFund />} />
+              <Route path="/stocks" element={<StockListing />} />
             </Routes>
           </main>
         </div>
