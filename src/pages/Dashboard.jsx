@@ -120,6 +120,29 @@ const Dashboard = () => {
               </Button>
             </div>
           </div>
+          
+          {/* Free Green Stock Section */}
+          <div className="space-y-4">
+            <img
+              src="https://via.placeholder.com/150"
+              alt="$5 Worth of Microsoft stock"
+              className="w-32 h-32 object-cover mb-2"
+            />
+            <div className="flex justify-between items-center">
+              <div>
+                <p className="font-semibold">$5 Worth of Microsoft stock</p>
+                <p className="text-gray-600">
+                  Gets you $5 worth of Microsoft stock.
+                </p>
+              </div>
+              <Button
+                onClick={() => handleUseVoucher('microsoft')}
+                disabled={microsoftVouchers === 0}
+              >
+                Use Voucher ({microsoftVouchers} left)
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
 
