@@ -78,7 +78,7 @@ const Dashboard = () => {
           {/* Transaction Voucher Section */}
           <div className="space-y-4">
             <img
-              src="https://via.placeholder.com/150"
+              src="//Get $5-2.png"
               alt="Transaction Voucher"
               className="w-32 h-32 object-cover mb-2"
             />
