@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 const Dashboard = () => {
   const [transactionVouchers, setTransactionVouchers] = useState(15);
   const [commissionVouchers, setCommissionVouchers] = useState(15);
+  const [transactionImage, setTransactionImage] = useState(null);
+  const [commissionImage, setCommissionImage] = useState(null);
 
   const portfolioData = [
     { name: 'Renewable Energy', value: 4000, impact: 2400, esgPoints: 85 },
@@ -24,12 +26,6 @@ const Dashboard = () => {
     { month: 'Jun', esgScore: 85 },
   ];
 
-  const totalESGPoints = 1250;
-  const currentTier = 'Silver';
-  const nextTier = 'Gold';
-  const pointsToNextTier = 1001 - totalESGPoints;
-  const tierProgress = (totalESGPoints / 1001) * 100;
-
   const impactData = [
     { month: 'Jan', co2Saved: 50, wasteReduction: 20, esgPoints: 100 },
     { month: 'Feb', co2Saved: 70, wasteReduction: 25, esgPoints: 150 },
@@ -38,6 +34,12 @@ const Dashboard = () => {
     { month: 'May', co2Saved: 150, wasteReduction: 50, esgPoints: 350 },
     { month: 'Jun', co2Saved: 200, wasteReduction: 70, esgPoints: 450 },
   ];
+
+  const totalESGPoints = 1250;
+  const currentTier = 'Silver';
+  const nextTier = 'Gold';
+  const pointsToNextTier = 1001 - totalESGPoints;
+  const tierProgress = (totalESGPoints / 1001) * 100;
 
   const totalCO2Saved = impactData.reduce((sum, data) => sum + data.co2Saved, 0);
   const totalWasteReduction = impactData.reduce((sum, data) => sum + data.wasteReduction, 0);
@@ -50,10 +52,20 @@ const Dashboard = () => {
     }
   };
 
+  const handleImageChange = (e, type) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      type === 'transaction'
+        ? setTransactionImage(imageUrl)
+        : setCommissionImage(imageUrl);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold text-gray-800">Personal Dashboard & Portfolio</h1>
-      
+
       <div className="bg-white p-6 rounded-lg shadow">
         <h2 className="text-xl font-semibold mb-4">Tier Progress</h2>
         <p className="text-gray-600 mb-2">Current Tier: <span className="font-bold text-blue-600">{currentTier}</span></p>
@@ -61,18 +73,30 @@ const Dashboard = () => {
         <Progress value={tierProgress} className="w-full" />
       </div>
 
-      {/* New Rewards Section */}
       <div className="bg-white p-6 rounded-lg shadow">
         <h2 className="text-xl font-semibold mb-4">Rewards</h2>
         <p className="text-gray-600 mb-4">As a {currentTier} tier member, you are eligible for the following rewards:</p>
-        
-        <div className="space-y-4">
-          <div className="flex justify-between items-center">
-            <div>
-              <p className="font-semibold">Transaction Fee Offset Voucher</p>
-              <p className="text-gray-600">Offsets transaction fees on your next 1 transaction.</p>
-            </div>
-            <div>
+
+        <div className="space-y-8">
+          <div className="space-y-4">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleImageChange(e, 'transaction')}
+              className="mb-2"
+            />
+            {transactionImage && (
+              <img
+                src={transactionImage}
+                alt="Transaction Voucher"
+                className="w-32 h-32 object-cover mb-2"
+              />
+            )}
+            <div className="flex justify-between items-center">
+              <div>
+                <p className="font-semibold">Transaction Fee Offset Voucher</p>
+                <p className="text-gray-600">Offsets transaction fees on your next 1 transaction.</p>
+              </div>
               <Button 
                 onClick={() => handleUseVoucher('transaction')} 
                 disabled={transactionVouchers === 0}
@@ -82,12 +106,25 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="flex justify-between items-center">
-            <div>
-              <p className="font-semibold">Commission Fee Offset Voucher</p>
-              <p className="text-gray-600">Offsets commission fees on your next service.</p>
-            </div>
-            <div>
+          <div className="space-y-4">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleImageChange(e, 'commission')}
+              className="mb-2"
+            />
+            {commissionImage && (
+              <img
+                src={commissionImage}
+                alt="Commission Voucher"
+                className="w-32 h-32 object-cover mb-2"
+              />
+            )}
+            <div className="flex justify-between items-center">
+              <div>
+                <p className="font-semibold">Commission Fee Offset Voucher</p>
+                <p className="text-gray-600">Offsets commission fees on your next service.</p>
+              </div>
               <Button 
                 onClick={() => handleUseVoucher('commission')} 
                 disabled={commissionVouchers === 0}
@@ -108,53 +145,6 @@ const Dashboard = () => {
           <p className="text-gray-600">Waste Reduction: <span className="font-bold text-green-600">{totalWasteReduction} kg</span></p>
           <p className="text-gray-600">Total ESG Points: <span className="font-bold text-blue-600">{totalESGPoints}</span></p>
         </div>
-      </div>
-      
-      <div className="bg-white p-6 rounded-lg shadow">
-        <h2 className="text-xl font-semibold mb-4">Impact History</h2>
-        <ResponsiveContainer width="100%" height={400}>
-          <LineChart data={impactData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="month" />
-            <YAxis yAxisId="left" />
-            <YAxis yAxisId="right" orientation="right" />
-            <Tooltip />
-            <Legend />
-            <Line yAxisId="left" type="monotone" dataKey="co2Saved" stroke="#82ca9d" name="CO2 Saved (tons)" />
-            <Line yAxisId="left" type="monotone" dataKey="wasteReduction" stroke="#8884d8" name="Waste Reduction (tons)" />
-            <Line yAxisId="right" type="monotone" dataKey="esgPoints" stroke="#ffc658" name="ESG Points" />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-
-      <div className="bg-white p-6 rounded-lg shadow">
-        <h2 className="text-xl font-semibold mb-4">Investment Distribution</h2>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={portfolioData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis yAxisId="left" orientation="left" stroke="#8884d8" />
-            <YAxis yAxisId="right" orientation="right" stroke="#82ca9d" />
-            <Tooltip />
-            <Legend />
-            <Bar yAxisId="left" dataKey="value" fill="#8884d8" name="Investment Value ($)" />
-            <Bar yAxisId="right" dataKey="esgPoints" fill="#82ca9d" name="ESG Points" />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-
-      <div className="bg-white p-6 rounded-lg shadow">
-        <h2 className="text-xl font-semibold mb-4">ESG Score Trend</h2>
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={esgTrendData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="month" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="esgScore" stroke="#8884d8" />
-          </LineChart>
-        </ResponsiveContainer>
       </div>
     </div>
   );
