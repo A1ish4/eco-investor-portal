@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 
 const Dashboard = () => {
   const [transactionVouchers, setTransactionVouchers] = useState(15);
-  const [commissionVouchers, setCommissionVouchers] = useState(15);
+  const [commissionVouchers, setCommissionVouchers] = useState(1);
 
   const portfolioData = [
     { name: 'Renewable Energy', value: 4000, impact: 2400, esgPoints: 85 },
