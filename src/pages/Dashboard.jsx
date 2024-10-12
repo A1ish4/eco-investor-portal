@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts';
-import { Progress } from "@/components/ui/progress"
+import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
 
 const Dashboard = () => {
+  const [transactionVouchers, setTransactionVouchers] = useState(15);
+  const [commissionVouchers, setCommissionVouchers] = useState(15);
+
   const portfolioData = [
     { name: 'Renewable Energy', value: 4000, impact: 2400, esgPoints: 85 },
     { name: 'Recycling', value: 3000, impact: 1398, esgPoints: 78 },
@@ -38,6 +42,14 @@ const Dashboard = () => {
   const totalCO2Saved = impactData.reduce((sum, data) => sum + data.co2Saved, 0);
   const totalWasteReduction = impactData.reduce((sum, data) => sum + data.wasteReduction, 0);
 
+  const handleUseVoucher = (type) => {
+    if (type === 'transaction' && transactionVouchers > 0) {
+      setTransactionVouchers(transactionVouchers - 1);
+    } else if (type === 'commission' && commissionVouchers > 0) {
+      setCommissionVouchers(commissionVouchers - 1);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold text-gray-800">Personal Dashboard & Portfolio</h1>
@@ -47,6 +59,44 @@ const Dashboard = () => {
         <p className="text-gray-600 mb-2">Current Tier: <span className="font-bold text-blue-600">{currentTier}</span></p>
         <p className="text-gray-600 mb-4">{pointsToNextTier} points to {nextTier} tier</p>
         <Progress value={tierProgress} className="w-full" />
+      </div>
+
+      {/* New Rewards Section */}
+      <div className="bg-white p-6 rounded-lg shadow">
+        <h2 className="text-xl font-semibold mb-4">Rewards</h2>
+        <p className="text-gray-600 mb-4">As a {currentTier} tier member, you are eligible for the following rewards:</p>
+        
+        <div className="space-y-4">
+          <div className="flex justify-between items-center">
+            <div>
+              <p className="font-semibold">Transaction Fee Offset Voucher</p>
+              <p className="text-gray-600">Offsets transaction fees on your next 1 transaction.</p>
+            </div>
+            <div>
+              <Button 
+                onClick={() => handleUseVoucher('transaction')} 
+                disabled={transactionVouchers === 0}
+              >
+                Use Voucher ({transactionVouchers} left)
+              </Button>
+            </div>
+          </div>
+
+          <div className="flex justify-between items-center">
+            <div>
+              <p className="font-semibold">Commission Fee Offset Voucher</p>
+              <p className="text-gray-600">Offsets commission fees on your next service.</p>
+            </div>
+            <div>
+              <Button 
+                onClick={() => handleUseVoucher('commission')} 
+                disabled={commissionVouchers === 0}
+              >
+                Use Voucher ({commissionVouchers} left)
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="bg-white p-6 rounded-lg shadow">
