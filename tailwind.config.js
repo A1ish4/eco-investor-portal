@@ -2,11 +2,13 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{js,jsx}",
-    "./components/**/*.{js,jsx}",
-    "./app/**/*.{js,jsx}",
-    "./src/**/*.{js,jsx}",
+    "./pages/**/*.{js,jsx,ts,tsx}",
+    "./components/**/*.{js,jsx,ts,tsx}",
+    "./app/**/*.{js,jsx,ts,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./public/**/*.html",
   ],
+  mode: "jit", // Enables Just-in-Time mode
   prefix: "",
   theme: {
     container: {
@@ -53,9 +55,9 @@ module.exports = {
         },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        lg: "var(--radius, 1rem)",
+        md: "calc(var(--radius, 1rem) - 2px)",
+        sm: "calc(var(--radius, 1rem) - 4px)",
       },
       keyframes: {
         "accordion-down": {

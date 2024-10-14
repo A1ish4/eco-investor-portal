@@ -7,19 +7,23 @@ import { resolve } from "path";
 export default defineConfig({
   server: {
     host: "::",
-    port: "8080",
+    port: 8080,
+    open: true, // Automatically open browser on start
+    https: false, // Enable HTTPS if required for PWA testing
   },
   plugins: [react()],
   resolve: {
-    alias: [
-      {
-        find: "@",
-        replacement: fileURLToPath(new URL("./src", import.meta.url)),
-      },
-      {
-        find: "lib",
-        replacement: resolve(__dirname, "lib"),
-      },
-    ],
+    alias: {
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+      lib: resolve(__dirname, "lib"),
+    },
+  },
+  build: {
+    outDir: "dist",
+    sourcemap: true,
+    minify: "esbuild",
+  },
+  define: {
+    "process.env": {},
   },
 });
